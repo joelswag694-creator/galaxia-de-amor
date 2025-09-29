@@ -13,7 +13,6 @@
       color: white;
     }
 
-    /* Texto central */
     .center-text {
       position: absolute;
       top: 50%;
@@ -25,26 +24,28 @@
       color: #ffb6f9;
       text-shadow: 0 0 20px #ff00ff, 0 0 40px #ff0080, 0 0 60px #ff00ff;
       animation: pulse 3s infinite alternate;
+      z-index: 1;
     }
+
     @keyframes pulse {
       from { transform: translate(-50%, -50%) scale(1); }
       to { transform: translate(-50%, -50%) scale(1.1); }
     }
 
-    /* Estrellas */
     .star {
       position: absolute;
       border-radius: 50%;
       background: white;
       opacity: 0.8;
       animation: twinkle 3s infinite ease-in-out;
+      z-index: 0;
     }
+
     @keyframes twinkle {
       0%, 100% { opacity: 0.2; }
       50% { opacity: 1; }
     }
 
-    /* Mensajes flotantes */
     .message {
       position: absolute;
       font-size: 1.2em;
@@ -52,7 +53,9 @@
       text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff1493;
       opacity: 0;
       animation: floatMessage 10s linear infinite;
+      z-index: 1;
     }
+
     @keyframes floatMessage {
       0% { transform: translateY(100vh); opacity: 0; }
       20% { opacity: 1; }
@@ -68,21 +71,19 @@
 
   <script>
     window.onload = function() {
-      // Generar estrellas
       const starsContainer = document.getElementById('stars');
-      for (let i = 0; i < 200; i++) {
+      for (let i = 0; i < 300; i++) {
         const star = document.createElement('div');
         star.classList.add('star');
-        const size = Math.random() * 3 + 1;
+        const size = Math.random() * 4 + 1;
         star.style.width = `${size}px`;
         star.style.height = `${size}px`;
         star.style.top = `${Math.random() * 100}vh`;
         star.style.left = `${Math.random() * 100}vw`;
-        star.style.animationDuration = `${2 + Math.random() * 4}s`;
+        star.style.animationDuration = `${2 + Math.random() * 3}s`;
         starsContainer.appendChild(star);
       }
 
-      // Mensajes románticos
       const messages = ["Te amo", "Mi todo", "Mi estrella", "Eres mi vida", "Siempre juntos", "Mi amor"];
       const messagesContainer = document.getElementById('messages');
 
