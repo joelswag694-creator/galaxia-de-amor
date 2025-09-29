@@ -12,8 +12,6 @@
       font-family: 'Arial', sans-serif;
       color: white;
     }
-
-    /* Texto central */
     .center-text {
       position: absolute;
       top: 50%;
@@ -30,8 +28,6 @@
       from { transform: translate(-50%, -50%) scale(1); }
       to { transform: translate(-50%, -50%) scale(1.1); }
     }
-
-    /* Estrellas */
     .star {
       position: absolute;
       border-radius: 50%;
@@ -43,8 +39,6 @@
       0%, 100% { opacity: 0.2; }
       50% { opacity: 1; }
     }
-
-    /* Mensajes flotantes */
     .message {
       position: absolute;
       font-size: 1.2em;
@@ -65,38 +59,33 @@
   <div class="center-text">Mi universo entero</div>
   <div id="stars"></div>
   <div id="messages"></div>
-
   <script>
-    // Generar estrellas
-    const starsContainer = document.getElementById('stars');
-    for (let i = 0; i < 200; i++) {
-      const star = document.createElement('div');
-      star.classList.add('star');
-      const size = Math.random() * 3 + 1;
-      star.style.width = ${size}px;
-      star.style.height = ${size}px;
-      star.style.top = ${Math.random() * 100}vh;
-      star.style.left = ${Math.random() * 100}vw;
-      star.style.animationDuration = ${2 + Math.random() * 4}s;
-      starsContainer.appendChild(star);
-    }
-
-    // Mensajes románticos
-    const messages = ["Te amo", "Mi todo", "Mi estrella", "Eres mi vida", "Siempre juntos", "Mi amor"];
-    const messagesContainer = document.getElementById('messages');
-
-    function createMessage() {
-      const msg = document.createElement('div');
-      msg.classList.add('message');
-      msg.textContent = messages[Math.floor(Math.random() * messages.length)];
-      msg.style.left = ${Math.random() * 80 + 10}vw;
-      msg.style.animationDuration = ${8 + Math.random() * 5}s;
-      messagesContainer.appendChild(msg);
-
-      setTimeout(() => { msg.remove(); }, 13000); // eliminar después de animación
-    }
-
-    setInterval(createMessage, 2000);
+    window.onload = function() {
+      const starsContainer = document.getElementById('stars');
+      for (let i = 0; i < 200; i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        const size = Math.random() * 3 + 1;
+        star.style.width = `${size}px`;
+        star.style.height = `${size}px`;
+        star.style.top = `${Math.random() * 100}vh`;
+        star.style.left = `${Math.random() * 100}vw`;
+        star.style.animationDuration = `${2 + Math.random() * 4}s`;
+        starsContainer.appendChild(star);
+      }
+      const messages = ["Te amo", "Mi todo", "Mi estrella", "Eres mi vida", "Siempre juntos", "Mi amor"];
+      const messagesContainer = document.getElementById('messages');
+      function createMessage() {
+        const msg = document.createElement('div');
+        msg.classList.add('message');
+        msg.textContent = messages[Math.floor(Math.random() * messages.length)];
+        msg.style.left = `${Math.random() * 80 + 10}vw`;
+        msg.style.animationDuration = `${8 + Math.random() * 5}s`;
+        messagesContainer.appendChild(msg);
+        setTimeout(() => { msg.remove(); }, 13000);
+      }
+      setInterval(createMessage, 2000);
+    };
   </script>
 </body>
 </html>
