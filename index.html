@@ -12,6 +12,8 @@
       font-family: 'Arial', sans-serif;
       color: white;
     }
+
+    /* Texto central */
     .center-text {
       position: absolute;
       top: 50%;
@@ -28,6 +30,8 @@
       from { transform: translate(-50%, -50%) scale(1); }
       to { transform: translate(-50%, -50%) scale(1.1); }
     }
+
+    /* Estrellas */
     .star {
       position: absolute;
       border-radius: 50%;
@@ -39,6 +43,8 @@
       0%, 100% { opacity: 0.2; }
       50% { opacity: 1; }
     }
+
+    /* Mensajes flotantes */
     .message {
       position: absolute;
       font-size: 1.2em;
@@ -59,8 +65,10 @@
   <div class="center-text">Mi universo entero</div>
   <div id="stars"></div>
   <div id="messages"></div>
+
   <script>
     window.onload = function() {
+      // Generar estrellas
       const starsContainer = document.getElementById('stars');
       for (let i = 0; i < 200; i++) {
         const star = document.createElement('div');
@@ -73,8 +81,11 @@
         star.style.animationDuration = `${2 + Math.random() * 4}s`;
         starsContainer.appendChild(star);
       }
+
+      // Mensajes románticos
       const messages = ["Te amo", "Mi todo", "Mi estrella", "Eres mi vida", "Siempre juntos", "Mi amor"];
       const messagesContainer = document.getElementById('messages');
+
       function createMessage() {
         const msg = document.createElement('div');
         msg.classList.add('message');
@@ -84,6 +95,7 @@
         messagesContainer.appendChild(msg);
         setTimeout(() => { msg.remove(); }, 13000);
       }
+
       setInterval(createMessage, 2000);
     };
   </script>
