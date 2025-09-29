@@ -1,104 +1,201 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mi universo entero</title>
-  <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-      background: radial-gradient(circle at center, #0b0033, #000);
-      font-family: 'Arial', sans-serif;
-      color: white;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi universo entero</title>
+<style>
+body {
+  margin: 0;
+  overflow: hidden;
+  background-image: url('images/galaxia.jpg'); /* pon tu galaxia aquí */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: 'Arial', sans-serif;
+  color: white;
+}
 
-    .center-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 3em;
-      font-weight: bold;
-      text-align: center;
-      color: #ffb6f9;
-      text-shadow: 0 0 20px #ff00ff, 0 0 40px #ff0080, 0 0 60px #ff00ff;
-      animation: pulse 3s infinite alternate;
-      z-index: 1;
-    }
+/* estrellas */
+#stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
 
-    @keyframes pulse {
-      from { transform: translate(-50%, -50%) scale(1); }
-      to { transform: translate(-50%, -50%) scale(1.1); }
-    }
+/* texto central */
+.center-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3em;
+  font-weight: bold;
+  text-align: center;
+  color: #ffb6f9;
+  text-shadow: 0 0 20px #ff00ff, 0 0 40px #ff0080, 0 0 60px #ff00ff;
+  animation: pulse 3s infinite alternate;
+  z-index: 3;
+}
+@keyframes pulse {
+  from { transform: translate(-50%, -50%) scale(1); }
+  to { transform: translate(-50%, -50%) scale(1.1); }
+}
 
-    .star {
-      position: absolute;
-      border-radius: 50%;
-      background: white;
-      opacity: 0.8;
-      animation: twinkle 3s infinite ease-in-out;
-      z-index: 0;
-    }
+/* estrellas pequeñas */
+.star {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: twinkle 3s infinite ease-in-out;
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+.star::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255,255,255,0.8), rgba(255,255,255,0));
+  border-radius: 50%;
+}
 
-    @keyframes twinkle {
-      0%, 100% { opacity: 0.2; }
-      50% { opacity: 1; }
-    }
+/* mensajes */
+.message {
+  position: absolute;
+  font-size: 1.2em;
+  color: #ffd1dc;
+  text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff1493;
+  opacity: 0;
+  animation: floatMessage 10s linear infinite;
+  z-index: 2;
+}
+@keyframes floatMessage {
+  0% { transform: translateY(100vh); opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translateY(-10vh); opacity: 0; }
+}
 
-    .message {
-      position: absolute;
-      font-size: 1.2em;
-      color: #ffd1dc;
-      text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff1493;
-      opacity: 0;
-      animation: floatMessage 10s linear infinite;
-      z-index: 1;
-    }
+/* nebulosa */
+#nebula {
+  position: fixed;
+  width: 200vw;
+  height: 200vh;
+  background: radial-gradient(circle at 25% 25%, rgba(255,0,255,0.15), transparent 60%),
+              radial-gradient(circle at 75% 50%, rgba(0,255,255,0.15), transparent 60%),
+              radial-gradient(circle at 50% 75%, rgba(255,255,0,0.1), transparent 60%);
+  z-index: 0;
+}
 
-    @keyframes floatMessage {
-      0% { transform: translateY(100vh); opacity: 0; }
-      20% { opacity: 1; }
-      80% { opacity: 1; }
-      100% { transform: translateY(-10vh); opacity: 0; }
-    }
-  </style>
+/* sistema solar */
+.solar-system {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  height: 500px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 1px dashed rgba(255,255,255,0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: spin linear infinite;
+}
+
+.orbit .planet {
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
+
+@keyframes spin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* planetas */
+.planet1 { width: 20px; height: 20px; background: #4fc3f7; }
+.planet2 { width: 25px; height: 25px; background: #ff7043; }
+.planet3 { width: 15px; height: 15px; background: #81c784; }
+.planet4 { width: 30px; height: 30px; background: #ba68c8; }
+</style>
 </head>
 <body>
-  <div class="center-text">Mi universo entero</div>
-  <div id="stars"></div>
-  <div id="messages"></div>
+<div id="nebula"></div>
+<div id="stars"></div>
+<div class="center-text">Mi universo entero</div>
+<div id="messages"></div>
 
-  <script>
-    window.onload = function() {
-      const starsContainer = document.getElementById('stars');
-      for (let i = 0; i < 300; i++) {
-        const star = document.createElement('div');
-        star.classList.add('star');
-        const size = Math.random() * 4 + 1;
-        star.style.width = `${size}px`;
-        star.style.height = `${size}px`;
-        star.style.top = `${Math.random() * 100}vh`;
-        star.style.left = `${Math.random() * 100}vw`;
-        star.style.animationDuration = `${2 + Math.random() * 3}s`;
-        starsContainer.appendChild(star);
-      }
+<!-- Sistema solar -->
+<div class="solar-system">
+  <div class="orbit" style="width:200px; height:200px; animation-duration:10s;">
+    <div class="planet planet1"></div>
+  </div>
+  <div class="orbit" style="width:300px; height:300px; animation-duration:15s;">
+    <div class="planet planet2"></div>
+  </div>
+  <div class="orbit" style="width:400px; height:400px; animation-duration:20s;">
+    <div class="planet planet3"></div>
+  </div>
+  <div class="orbit" style="width:500px; height:500px; animation-duration:25s;">
+    <div class="planet planet4"></div>
+  </div>
+</div>
 
-      const messages = ["Te amo", "Mi todo", "Mi estrella", "Eres mi vida", "Siempre juntos", "Mi amor"];
-      const messagesContainer = document.getElementById('messages');
+<script>
+window.onload = function() {
+  /* estrellas */
+  const starsContainer = document.getElementById('stars');
+  const colors = ["#ffffff", "#ffffaa", "#aaddff", "#ffddaa", "#ff99ff"];
+  for (let i = 0; i < 700; i++) {
+    const star = document.createElement('div');
+    star.classList.add('star');
+    const size = Math.random() * 4 + 1;
+    star.style.width = `${size}px`;
+    star.style.height = `${size}px`;
+    star.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    star.style.top = `${Math.random() * 100}vh`;
+    star.style.left = `${Math.random() * 100}vw`;
+    star.style.animationDuration = `${2 + Math.random() * 3}s`;
+    starsContainer.appendChild(star);
+  }
 
-      function createMessage() {
-        const msg = document.createElement('div');
-        msg.classList.add('message');
-        msg.textContent = messages[Math.floor(Math.random() * messages.length)];
-        msg.style.left = `${Math.random() * 80 + 10}vw`;
-        msg.style.animationDuration = `${8 + Math.random() * 5}s`;
-        messagesContainer.appendChild(msg);
-        setTimeout(() => { msg.remove(); }, 13000);
-      }
+  /* mensajes */
+  const messages = [
+    "Te amo", "Mi todo", "Mi estrella", 
+    "Eres mi vida", "Siempre juntos", 
+    "Mi amor", "Mi luz"
+  ];
+  const messagesContainer = document.getElementById('messages');
 
-      setInterval(createMessage, 2000);
-    };
-  </script>
+  function createMessage() {
+    const msg = document.createElement('div');
+    msg.classList.add('message');
+    msg.textContent = messages[Math.floor(Math.random() * messages.length)];
+    msg.style.left = `${Math.random() * 80 + 10}vw`;
+    msg.style.animationDuration = `${8 + Math.random() * 5}s`;
+    messagesContainer.appendChild(msg);
+    setTimeout(() => { msg.remove(); }, 13000);
+  }
+
+  setInterval(createMessage, 2000);
+};
+</script>
 </body>
 </html>
